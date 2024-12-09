@@ -24,3 +24,7 @@ services:
     environment:
       GF_INSTALL_PLUGINS: grafana-piechart-panel,grafana-worldmap-panel
       GF_AUTH_ANONYMOUS_ENABLED: 'true'
+volumes:
+  parsedmarc_input:
+  parsedmarc_output_files:
+  parsedmarc_elastic_data:
