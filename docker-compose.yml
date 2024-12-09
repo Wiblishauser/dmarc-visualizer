@@ -2,8 +2,8 @@ services:
   parsedmarc:
     build: ./parsedmarc/
     volumes:
-      - dmarc-visualizer/files:/input:ro
-      - dmarc-visualizer/output_files:/output
+      - parsedmarc_input:/input:ro
+      - parsedmarc_output_files:/output
     command: parsedmarc -c /parsedmarc.ini /input/* --debug
     depends_on:
       - elasticsearch
@@ -14,7 +14,7 @@ services:
     environment:
       - discovery.type=single-node
     volumes:
-      - dmarc-visualizer/elastic_data:/usr/share/elasticsearch/data
+      - parsedmarc_elastic_data:/usr/share/elasticsearch/data
 
   grafana:
     build: ./grafana/
@@ -24,5 +24,3 @@ services:
     environment:
       GF_INSTALL_PLUGINS: grafana-piechart-panel,grafana-worldmap-panel
       GF_AUTH_ANONYMOUS_ENABLED: 'true'
-volumes:
-    dmarc-visualizer:
