@@ -1,4 +1,4 @@
-FROM grafana/grafana:latest
+FROM grafana/grafana:11.4.0
 
 ADD --chown=grafana:root https://raw.githubusercontent.com/domainaware/parsedmarc/master/grafana/Grafana-DMARC_Reports.json /var/lib/grafana/dashboards/
 RUN chmod 644 /etc/grafana/provisioning
