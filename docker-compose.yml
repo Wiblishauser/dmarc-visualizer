@@ -2,8 +2,8 @@ services:
   parsedmarc:
     build: ./parsedmarc/
     volumes:
-      - parsedmarc_input:/input:ro
-      - parsedmarc_output_files:/output
+      - ./files:/input:ro
+      - ./output_files:/output
     command: parsedmarc -c /parsedmarc.ini /input/* --debug
     depends_on:
       - elasticsearch
@@ -19,7 +19,7 @@ services:
       - xpack.security.transport.ssl.enabled=false
       - xpack.security.transport.ssl.verification_mode=certificate
     volumes:
-      - parsedmarc_elastic_data:/usr/share/elasticsearch/data
+      - ./elastic_data:/usr/share/elasticsearch/data
 
   grafana:
     build: ./grafana/
@@ -29,7 +29,3 @@ services:
     environment:
       GF_INSTALL_PLUGINS: grafana-piechart-panel,grafana-worldmap-panel
       GF_AUTH_ANONYMOUS_ENABLED: 'true'
-volumes:
-  parsedmarc_input:
-  parsedmarc_output_files:
-  parsedmarc_elastic_data:
